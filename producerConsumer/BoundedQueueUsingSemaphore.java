@@ -7,13 +7,13 @@ public class BoundedQueueUsingSemaphore<T> {
     private int size = 0;
     private int start = 0, end = 0;
     private Object[] queue;
-    private Semaphore full, empty;
+    private Semaphore filled, empty;
     private Object lock = new Object();
 
     public BoundedQueueUsingSemaphore(int capacity) {
         this.capacity = capacity;
         queue = new Object[capacity];
-        full = new Semaphore(0);
+        filled = new Semaphore(0);
         empty = new Semaphore(capacity);
     }
 
@@ -27,13 +27,13 @@ public class BoundedQueueUsingSemaphore<T> {
             end = end + 1;
             size = size + 1;
         }
-        full.release();
+        filled.release();
     }
 
     @SuppressWarnings("unchecked")
     public T removeFirst() throws InterruptedException {
         Object item;
-        full.acquire();
+        filled.acquire();
         synchronized (lock) {
             if (start == capacity) {
                 start = 0;

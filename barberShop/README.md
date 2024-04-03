@@ -1,0 +1,1 @@
+1. It looks similar to `Producer Consumer` with `one consumer` but `producer` go back to home if queue is full.
