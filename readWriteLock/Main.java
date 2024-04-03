@@ -11,11 +11,11 @@ public class Main {
         List<Thread> allThreads = new ArrayList<>();
         Random random = new Random();
 
-        for (int i = 0; i < 20; i = i + 1) {
+        for (int i = 0; i < 1; i = i + 1) {
             Thread t = Thread.ofPlatform().unstarted(() -> {
                 try {
                     rwLock.acquireReadLock();
-                    System.out.println("enter"+Thread.currentThread().getName());
+                    System.out.println("enter  "+Thread.currentThread().getName());
                     Thread.sleep(random.nextLong(3000));
                     System.out.println("-----returned-----"+Thread.currentThread().getName());
                     rwLock.releaseReadLock();
@@ -31,7 +31,7 @@ public class Main {
             Thread t = Thread.ofPlatform().unstarted(() -> {
                 try {
                     rwLock.acquireWriteLock();
-                    System.out.println("enter ***** "+Thread.currentThread().getName());
+                    System.out.println("enter  "+Thread.currentThread().getName());
                     Thread.sleep(random.nextLong(3000));
                     System.out.println("-----returned-----"+Thread.currentThread().getName());
                     rwLock.releaseWriteLock();
