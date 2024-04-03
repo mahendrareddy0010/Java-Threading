@@ -1,8 +1,8 @@
 package readWriteLock;
 
 public class ReadWriteLock {
-    private int activeReads = 0;
-    private int activeWrites = 0;
+    private int readers = 0;
+    private int writers = 0;
 
     private int MAX_READS = 3, MAX_WRITES = 1;
 
@@ -11,44 +11,38 @@ public class ReadWriteLock {
         MAX_WRITES = maxWrites;
     }
 
-    public synchronized void readLock() throws InterruptedException {
-        while (activeReads == MAX_READS) {
+    public synchronized void acquireReadLock() throws InterruptedException {
+        while (readers == MAX_READS) {
             wait();
         }
-        activeReads = activeReads + 1;
+        readers = readers + 1;
         notifyAll();
     }
 
-    public synchronized void readUnlock() {
-        activeReads = activeReads - 1;
+    public synchronized void releaseReadLock() {
+        readers = readers - 1;
         notifyAll();
     }
 
-    public synchronized void writeLock() throws InterruptedException {
-        while (activeReads > 0 || activeWrites == MAX_WRITES) {
+    public synchronized void acquireWriteLock() throws InterruptedException {
+        while (readers > 0 || writers == MAX_WRITES) {
             wait();
         }
-        activeWrites = activeWrites + 1;
+        writers = writers + 1;
         notifyAll();
     }
 
-    public synchronized void writeUnlock() {
-        activeWrites = activeWrites - 1;
+    public synchronized void releaseWriteLock() {
+        writers = writers - 1;
         notifyAll();
     }
 
-    @Override
-    public String toString() {
-        return "[activeReads=" + activeReads + ", activeWrites=" + activeWrites + "]"
-                + Thread.currentThread().getName();
+    public int getReaders() {
+        return readers;
     }
 
-    public int getActiveReads() {
-        return activeReads;
-    }
-
-    public int getActiveWrites() {
-        return activeWrites;
+    public int getWriters() {
+        return writers;
     }
 
 }
