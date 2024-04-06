@@ -7,6 +7,7 @@
     6. `Cyclic barrier implementation`
     7. `Uber Rider Problem`
     8. `Barber Shop Pproblem`
+    9. `Lock Free Stack/ Non blocking Stack implementation`
 
 `Reference : ` Java Multithreading, Concurrency & Performance Optimization course on udemy by Michael Pogrebinsky
             https://www.udemy.com/course/java-multithreading-concurrency-performance-optimization/?couponCode=ST13MT40224
