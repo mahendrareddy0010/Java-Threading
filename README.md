@@ -10,6 +10,7 @@
     9. `Lock Free Stack/ Non blocking Stack implementation`
     10. `Data structures and Algorithms :`
             a. `Merge Sort`
+    11. `Data Race demo and use of volatile keyword`
 
 `Reference : ` Java Multithreading, Concurrency & Performance Optimization course on udemy by Michael Pogrebinsky
             https://www.udemy.com/course/java-multithreading-concurrency-performance-optimization/?couponCode=ST13MT40224
