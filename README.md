@@ -13,6 +13,10 @@
     11. `Data Race demo and use of volatile keyword`
     12. `Unisex Bathroom problem without starvation`
 
+`Note: `One of the reason why starvation leads to bad performance is that you need to hold on some valid & which are optimal to execute.
+`For example`, Consider Read-Write locks, while first thread takes Read lock and wait lot of time, in mean time you can kept on executing read threads as long as it does not cross MAX reads at time and first thread releases lock. To avoid starvation, we have to hold back read threads.
+`Crux of the problem` here, is that we don't know how any read thread holds the read lock.
+
 `Reference : ` Java Multithreading, Concurrency & Performance Optimization course on udemy by Michael Pogrebinsky
             https://www.udemy.com/course/java-multithreading-concurrency-performance-optimization/?couponCode=ST13MT40224
 
