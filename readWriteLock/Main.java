@@ -1,23 +1,19 @@
 package readWriteLock;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Main {
     public static void main(String[] args) throws InterruptedException {
         // final ReadWriteLock rwLock = new ReadWriteLock(3, 3);
+        // final ReadWriteLockPartialStarvation rwLock = new ReadWriteLockPartialStarvation();
         final ReadWriteLockWithoutStarvation rwLock = new ReadWriteLockWithoutStarvation();
-        List<Thread> allThreads = new ArrayList<>();
-        Random random = new Random();
+        Set<Thread> allThreads = new HashSet<>();
 
-        for (int i = 0; i < 1; i = i + 1) {
+        for (int i = 0; i < 1000; i = i + 1) {
             Thread t = Thread.ofPlatform().unstarted(() -> {
                 try {
                     rwLock.acquireReadLock();
-                    System.out.println("enter  "+Thread.currentThread().getName());
-                    Thread.sleep(random.nextLong(3000));
-                    System.out.println("-----returned-----"+Thread.currentThread().getName());
                     rwLock.releaseReadLock();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -27,13 +23,10 @@ public class Main {
             allThreads.add(t);
         }
 
-        for (int i = 0; i < 10; i = i + 1) {
+        for (int i = 0; i < 1000; i = i + 1) {
             Thread t = Thread.ofPlatform().unstarted(() -> {
                 try {
                     rwLock.acquireWriteLock();
-                    System.out.println("enter  "+Thread.currentThread().getName());
-                    Thread.sleep(random.nextLong(3000));
-                    System.out.println("-----returned-----"+Thread.currentThread().getName());
                     rwLock.releaseWriteLock();
                 } catch (InterruptedException e) {
                     e.printStackTrace();

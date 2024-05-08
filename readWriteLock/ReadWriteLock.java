@@ -12,7 +12,7 @@ public class ReadWriteLock {
     }
 
     public synchronized void acquireReadLock() throws InterruptedException {
-        while (readers == MAX_READS) {
+        while (writers > 0 || readers == MAX_READS) {
             wait();
         }
         readers = readers + 1;

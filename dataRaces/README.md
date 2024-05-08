@@ -14,7 +14,8 @@
     `Reason:` consider the scenario, `x = y = 0`.
         `y++` 
                 `x < y this is not atomic opertion`
-                `read x`
         `x++`
+                `read x`
                 `read y`
                 `check x < y , here now x=1, y=1, so it fails`
+        `y++` 
